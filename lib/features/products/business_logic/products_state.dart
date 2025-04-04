@@ -7,13 +7,11 @@ final class ProductsInitial extends ProductsState {}
 
 final class ProductsLoading extends ProductsState {}
 
-final class ProductsFavoritesResult extends ProductsState {
-  final bool isAdd;
+final class ProductsDeleteResult extends ProductsState {
   final bool success;
   final String message;
 
-  ProductsFavoritesResult({
-    required this.isAdd,
+  ProductsDeleteResult({
     required this.success,
     required this.message,
   });

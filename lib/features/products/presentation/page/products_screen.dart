@@ -15,7 +15,7 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<ProductsCubit, ProductsState>(
       listener: (context, state) {
-        if (state is ProductsFavoritesResult) {
+        if (state is ProductsDeleteResult) {
           if (state.success) {
             Get.snackbar(
               "success".tr,

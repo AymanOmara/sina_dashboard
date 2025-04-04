@@ -4,6 +4,7 @@ class Urls {
   static const banner = "Panner/GetPanner";
 
   static const products = "/Product";
+  static const deleteProduct = "Product/DeleteProduct/";
 
   static const login = "User/Login";
   static const deleteAccount = "User/DeleteAccount/";

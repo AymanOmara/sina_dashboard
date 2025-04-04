@@ -35,7 +35,7 @@ void registerDependencies(GetIt diInjector) async {
       () => SinaDrawerCubit(diInjector(), diInjector(), diInjector()));
 
   /// ********* Products **********
-  getIt.registerFactoryParam((p1, _) => ProductsCubit(diInjector()));
+  getIt.registerFactoryParam((p1, _) => ProductsCubit(diInjector(),diInjector()));
   getIt.registerFactoryParam((p1, _) => ProductDetailsCubit(
         p1 as ProductEntity,
       ));
