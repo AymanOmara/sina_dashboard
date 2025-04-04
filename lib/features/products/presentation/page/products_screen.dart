@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:ibn_sina_flutter/core/ui/ecis_text_field.dart';
+import 'package:ibn_sina_flutter/core/ui/dimensions.dart';
 import 'package:ibn_sina_flutter/core/ui/loading/loading_widget.dart';
 import 'package:ibn_sina_flutter/core/ui/sina_top_navigation_bar.dart';
 import 'package:ibn_sina_flutter/features/products/business_logic/products_cubit.dart';
-import 'package:ibn_sina_flutter/features/products/presentation/widgets/product_widget.dart';
+import 'package:ibn_sina_flutter/features/products/presentation/widgets/product_data_grid_source.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -38,41 +39,82 @@ class ProductsScreen extends StatelessWidget {
           body: Column(
             children: [
               SinaTopNavigationBar(
-                title: cubit.params.display.title,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                child: SinaTextField(
-                  title: "",
-                  prefix: Icon(Icons.search),
-                  placeholder: "search".tr,
-                  onChanged: (txt) {
-                    cubit.updateSearchTerm(txt);
-                  },
-                ),
+                title: "products".tr,
               ),
               Expanded(
                 child: LoadingWidget(
                   loadingState: cubit.loading,
                   successWidget: Expanded(
-                    child: SingleChildScrollView(
-                      child: Wrap(
-                        spacing: 20,
-                        runSpacing: 10,
-                        children: cubit.products
-                            .where((pr) =>
-                                pr.productName.contains(cubit.searchTerm))
-                            .map((e) => ProductWidget(
-                                  product: e,
-                                  changeFavoriteStatus: (product) {
-                                    cubit.handleFavorite(product);
-                                  },
-                                ))
-                            .toList(),
+                    child: SfDataGrid(
+                      columnWidthMode: ColumnWidthMode.fill,
+                      shrinkWrapRows: true,
+                      onQueryRowHeight: (raw) {
+                        return raw.getIntrinsicRowHeight(raw.rowIndex);
+                      },
+                      source: ProductDataGridSource(
+                        products: cubit.products,
+                        onDelete: cubit.onDelete,
+                        onUpdate: cubit.onUpdate,
                       ),
+                      columns: [
+                        GridColumn(
+                          columnName: 'id',
+                          label: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Dimensions.gridRowPadding,
+                            ),
+                            child: Text(
+                              'ID',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        GridColumn(
+                          columnName: 'name',
+                          label: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Dimensions.gridRowPadding,
+                            ),
+                            child: Text(
+                              'Name',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        GridColumn(
+                          columnName: 'price',
+                          label: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.gridRowPadding),
+                            child: Text(
+                              'Price',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        GridColumn(
+                          columnName: 'category',
+                          label: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.gridRowPadding),
+                            child: Text(
+                              'Category',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                        GridColumn(
+                          columnName: 'actions',
+                          label: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Dimensions.gridRowPadding),
+                            child: Text(
+                              'Actions',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   onRetry: cubit.fetchProducts,

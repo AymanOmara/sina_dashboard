@@ -12,7 +12,6 @@ import 'package:ibn_sina_flutter/features/notifications/business_logic/notificat
 import 'package:ibn_sina_flutter/features/orders_history/business_logic/orders_history_cubit.dart';
 import 'package:ibn_sina_flutter/features/product_details/business_logic/product_details_cubit.dart';
 import 'package:ibn_sina_flutter/features/products/business_logic/products_cubit.dart';
-import 'package:ibn_sina_flutter/features/products/display/product_list_params.dart';
 
 var getIt = GetIt.I;
 
@@ -36,13 +35,7 @@ void registerDependencies(GetIt diInjector) async {
       () => SinaDrawerCubit(diInjector(), diInjector(), diInjector()));
 
   /// ********* Products **********
-  getIt.registerFactoryParam((p1, _) => ProductsCubit(
-        p1 as ProductListParams,
-        diInjector(),
-        diInjector(),
-        diInjector(),
-        diInjector(),
-      ));
+  getIt.registerFactoryParam((p1, _) => ProductsCubit(diInjector()));
   getIt.registerFactoryParam((p1, _) => ProductDetailsCubit(
         p1 as ProductEntity,
       ));

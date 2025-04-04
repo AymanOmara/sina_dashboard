@@ -118,27 +118,27 @@ class StudentEquipmentsWidget extends StatelessWidget {
                   title: "cloths".tr,
                   isSelected: cubit.clothes,
                 ),
-                InkWell(
-                  onTap: () {
-                    cubit.request.categoryName =
-                        cubit.category.productType.type;
-                    Navigator.of(context).pushNamed(
-                      AppRoutes.products,
-                      arguments: ProductListParams(
-                        request: cubit.request,
-                        display: cubit.category,
-                      ),
-                    );
-                  },
-                  child: Text(
-                    "enter".tr,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                )
+                // InkWell(
+                //   onTap: () {
+                //     cubit.request.categoryName =
+                //         cubit.category.productType.type;
+                //     Navigator.of(context).pushNamed(
+                //       AppRoutes.products,
+                //       arguments: ProductListParams(
+                //         request: cubit.request,
+                //         display: cubit.category,
+                //       ),
+                //     );
+                //   },
+                //   child: Text(
+                //     "enter".tr,
+                //     style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 22,
+                //       fontWeight: FontWeight.w600,
+                //     ),
+                //   ),
+                // )
               ],
             ),
           ),

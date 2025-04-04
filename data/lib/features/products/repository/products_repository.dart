@@ -13,12 +13,9 @@ class ProductsRepository implements IProductsRepository {
   const ProductsRepository(this._iApiService);
 
   @override
-  Future<Result<List<ProductEntity>, NetworkException>> fetchProducts(
-    FetchProductsRequest request,
-  ) async {
-    var result = await _iApiService.fetchData<List<ProductModel?>>(
-        GetProductsRequest(request: request),
-        data: Products());
+  Future<Result<List<ProductEntity>, NetworkException>> fetchProducts() async {
+    var result = await _iApiService
+        .fetchData<List<ProductModel?>>(GetProductsRequest(), data: Products());
     return result.fold(onSuccess: (data) {
       var list =
           data?.map((e) => e?.toEntity()).whereType<ProductEntity>().toList() ??

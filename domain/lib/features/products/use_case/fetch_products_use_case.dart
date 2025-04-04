@@ -9,7 +9,7 @@ class FetchProductsUseCase {
 
   const FetchProductsUseCase(this._repository);
 
-  Future<Result<List<ProductEntity>,NetworkException>> call(FetchProductsRequest request) {
-    return _repository.fetchProducts(request);
+  Future<Result<List<ProductEntity>,NetworkException>> call() {
+    return _repository.fetchProducts();
   }
 }

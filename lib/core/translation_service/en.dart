@@ -109,9 +109,16 @@ Map<String, String> en = {
   "other_equipment": "Other Equipment",
   "enter": "Enter",
   "search": "Search",
-  "clothes":"Clothes",
-  "teeth":"Teeth",
-  "success_add_favorite":"Product has been added to favorites successfully",
-  "success_delete_favorite":"Product has been deleted from favorite successfully",
-  "favorites":"Favorites",
+  "clothes": "Clothes",
+  "teeth": "Teeth",
+  "success_add_favorite": "Product has been added to favorites successfully",
+  "success_delete_favorite":
+      "Product has been deleted from favorite successfully",
+  "favorites": "Favorites",
+  "student": "Student Equipment",
+  "medicalClothes": "Medical Clothes",
+  "filesBurs": "Files",
+  "equipment": "equipment",
+  "correction": "orthodontics",
+  "files": "files"
 };

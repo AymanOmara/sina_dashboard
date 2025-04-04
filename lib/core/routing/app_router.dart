@@ -40,7 +40,6 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => getIt<ProductsCubit>(
-              param1: settings.arguments as ProductListParams,
             ),
             child: ProductsScreen(),
           ),

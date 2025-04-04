@@ -1,7 +1,7 @@
-import 'package:domain/features/products/entity/fetch_product_request.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ibn_sina_flutter/features/home/business_logic/home_cubit.dart';
+import 'package:ibn_sina_flutter/features/home/presentation/widgets/home_service_card.dart';
 import 'package:ibn_sina_flutter/features/home/presentation/widgets/home_top_bar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,6 +19,20 @@ class HomeScreen extends StatelessWidget {
               HomeTopBar(
                 onMenuPressed: () {},
               ),
+              Expanded(
+                child: GridView.builder(
+                  itemCount: cubit.services.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5,
+                  ),
+                  itemBuilder: (context, index) {
+                    var service = cubit.services[index];
+                    return HomeServiceCard(
+                      display: service,
+                    );
+                  },
+                ),
+              )
             ],
           ),
         );

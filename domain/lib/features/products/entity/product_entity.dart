@@ -1,3 +1,5 @@
+import 'package:domain/features/products/entity/product_type.dart';
+
 class ProductEntity {
   final int productId;
   final String productName;
@@ -49,6 +51,8 @@ class ProductEntity {
   bool get hasDiscount => discount > 0;
 
   bool get available => amount > 0;
+
+  ProductType get productType => ProductType.fromString(type);
 
   Map<String, dynamic> toJson() {
     return {

@@ -13,4 +13,13 @@ enum ProductType {
   const ProductType({
     required this.type,
   });
+
+  static ProductType fromString(String type) {
+    for (var productType in ProductType.values) {
+      if (productType.type == type) {
+        return productType;
+      }
+    }
+    return consumables;
+  }
 }

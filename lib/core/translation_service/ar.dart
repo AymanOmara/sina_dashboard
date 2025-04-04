@@ -114,4 +114,11 @@ Map<String, String> ar = {
   "success_add_favorite": "تم اضافه المنتج الي المفضله بنجاح",
   "success_delete_favorite": "تم حذف المنتج من المفضله بنجاح",
   "favorites": "المفضله",
+  "studentsEquipments": "معدات الطلاب",
+  "medicalClothes": "الملابس الطبية",
+  "filesBurs": "المبارد",
+  "student": "معدات الطلاب",
+  "equipment": "المعدات",
+  "correction": "التقويم",
+  "files": "المبارد"
 };

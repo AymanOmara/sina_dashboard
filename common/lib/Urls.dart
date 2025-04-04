@@ -1,9 +1,9 @@
 class Urls {
   Urls._();
-  static const baseUrl = "http://10.0.2.2:5029/api/";
+  static const baseUrl = "http://localhost:5029/api/";
   static const banner = "Panner/GetPanner";
 
-  static const products = "Product/GetProduct/";
+  static const products = "/Product";
 
   static const login = "User/Login";
   static const deleteAccount = "User/DeleteAccount/";
