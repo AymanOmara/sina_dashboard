@@ -1,9 +1,12 @@
 class Urls {
   Urls._();
+
   static const baseUrl = "http://localhost:5029/api/";
   static const banner = "Panner/GetPanner";
 
   static const products = "/Product";
+  static const addProduct = "Product/AddProduct";
+  static const updateProduct = "Product/UpdateProduct/";
   static const deleteProduct = "Product/DeleteProduct/";
 
   static const login = "User/Login";
@@ -18,5 +21,4 @@ class Urls {
   static String addToFavorites = "Product/AddFavorite";
   static String removeFromFavorites = "Product/DeleteFavorite";
   static String registerFcmToken = "Notifications/RegisterFCMToken";
-
 }

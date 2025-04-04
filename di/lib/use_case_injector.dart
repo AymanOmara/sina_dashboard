@@ -21,6 +21,7 @@ import 'package:domain/features/order/use_case/create_order_use_case.dart';
 import 'package:domain/features/order/use_case/fetch_orders_use_case.dart';
 import 'package:domain/features/products/use_case/delete_product_use_case.dart';
 import 'package:domain/features/products/use_case/fetch_products_use_case.dart';
+import 'package:domain/features/products/use_case/update_product_use_case.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> setupUseCaseInjector(GetIt diInjector) async {
@@ -42,6 +43,7 @@ Future<void> setupUseCaseInjector(GetIt diInjector) async {
 
   /// ********* Products **********
   diInjector.registerFactory(() => FetchProductsUseCase(diInjector()));
+  diInjector.registerFactory(() => UpdateProductUseCase(diInjector()));
   diInjector.registerFactory(() => DeleteProductUseCase(diInjector()));
 
   diInjector.registerFactory(() => AddToCartUseCase(diInjector()));

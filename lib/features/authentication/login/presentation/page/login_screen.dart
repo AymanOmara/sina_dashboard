@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:ibn_sina_flutter/core/helper/utils.dart';
-import 'package:ibn_sina_flutter/core/ui/ecis_text_field.dart';
+import 'package:ibn_sina_flutter/core/ui/sina_text_field.dart';
 import 'package:ibn_sina_flutter/core/ui/loading/sina_loading_button.dart';
 import 'package:ibn_sina_flutter/core/ui/theme/colors.dart';
 import 'package:ibn_sina_flutter/features/authentication/login/business_logic/login_cubit.dart';

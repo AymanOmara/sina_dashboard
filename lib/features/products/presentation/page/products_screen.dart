@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:ibn_sina_flutter/core/routing/app_routes.dart';
 import 'package:ibn_sina_flutter/core/ui/dimensions.dart';
 import 'package:ibn_sina_flutter/core/ui/loading/loading_widget.dart';
 import 'package:ibn_sina_flutter/core/ui/sina_top_navigation_bar.dart';
+import 'package:ibn_sina_flutter/features/add_update_product/display/update_product_params.dart';
 import 'package:ibn_sina_flutter/features/products/business_logic/products_cubit.dart';
 import 'package:ibn_sina_flutter/features/products/presentation/widgets/product_data_grid_source.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -41,6 +43,20 @@ class ProductsScreen extends StatelessWidget {
               SinaTopNavigationBar(
                 title: "products".tr,
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.addUpdateProduct,
+                    arguments: UpdateProductParams(
+                      updateAble: cubit,
+                    ),
+                  );
+                },
+                child: Text(
+                  "add_new_product".tr,
+                ),
+              ),
               Expanded(
                 child: LoadingWidget(
                   loadingState: cubit.loading,
@@ -54,7 +70,15 @@ class ProductsScreen extends StatelessWidget {
                       source: ProductDataGridSource(
                         products: cubit.products,
                         onDelete: cubit.onDelete,
-                        onUpdate: cubit.onUpdate,
+                        onUpdate: (product) {
+                          Navigator.of(context).pushNamed(
+                            AppRoutes.addUpdateProduct,
+                            arguments: UpdateProductParams(
+                              product: product,
+                              updateAble: cubit,
+                            ),
+                          );
+                        },
                       ),
                       columns: [
                         GridColumn(

@@ -1,9 +1,11 @@
-import 'package:domain/features/products/entity/product_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:ibn_sina_flutter/core/di/injector.dart';
 import 'package:ibn_sina_flutter/core/routing/app_routes.dart';
+import 'package:ibn_sina_flutter/features/add_update_product/business_logic/add_update_product_cubit.dart';
+import 'package:ibn_sina_flutter/features/add_update_product/display/update_product_params.dart';
+import 'package:ibn_sina_flutter/features/add_update_product/presentation/add_update_product_screen.dart';
 import 'package:ibn_sina_flutter/features/authentication/login/business_logic/login_cubit.dart';
 import 'package:ibn_sina_flutter/features/authentication/login/presentation/page/login_screen.dart';
 import 'package:ibn_sina_flutter/features/authentication/registration/business_logic/registration_cubit.dart';
@@ -18,12 +20,8 @@ import 'package:ibn_sina_flutter/features/notifications/business_logic/notificat
 import 'package:ibn_sina_flutter/features/notifications/presentation/page/notifications_screen.dart';
 import 'package:ibn_sina_flutter/features/orders_history/business_logic/orders_history_cubit.dart';
 import 'package:ibn_sina_flutter/features/orders_history/presentation/page/order_history_screen.dart';
-import 'package:ibn_sina_flutter/features/product_details/business_logic/product_details_cubit.dart';
-import 'package:ibn_sina_flutter/features/product_details/presentation/page/product_details_screen.dart';
 import 'package:ibn_sina_flutter/features/products/business_logic/products_cubit.dart';
-import 'package:ibn_sina_flutter/features/products/display/product_list_params.dart';
 import 'package:ibn_sina_flutter/features/products/presentation/page/products_screen.dart';
-
 
 class AppRouter {
   Route? generateRouter(RouteSettings settings) {
@@ -39,18 +37,17 @@ class AppRouter {
       case AppRoutes.products:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<ProductsCubit>(
-            ),
+            create: (context) => getIt<ProductsCubit>(),
             child: ProductsScreen(),
           ),
         );
-      case AppRoutes.productDetails:
+      case AppRoutes.addUpdateProduct:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => getIt<ProductDetailsCubit>(
-              param1: settings.arguments as ProductEntity,
+            create: (context) => getIt<AddUpdateProductCubit>(
+              param1: settings.arguments as UpdateProductParams,
             ),
-            child: ProductDetailsScreen(),
+            child: AddUpdateProductScreen(),
           ),
         );
       case AppRoutes.login:

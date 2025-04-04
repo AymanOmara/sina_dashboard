@@ -17,7 +17,7 @@ class AppRoutes {
 
   /// ********* products **********
   static const products = "products";
-  static const productDetails = "productDetails";
+  static const addUpdateProduct = "addUpdateProduct";
 
   /// ********* favorites **********
   static const favorites = "favorites";
