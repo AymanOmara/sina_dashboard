@@ -15,15 +15,15 @@ class BaseResponse<T> implements DecodeAble<BaseResponse<T?>, Map?> {
 
   @override
   BaseResponse<T?> fromJson(json) {
-    var jsonData = json?.containsKey("data");
-    var isPrimitive = jsonData.runtimeType == String ||
-        jsonData.runtimeType == int ||
-        jsonData.runtimeType == double ||
-        jsonData.runtimeType == bool;
+    final dataValue = json?["data"];
+    final isPrimitive = dataValue is String ||
+        dataValue is int ||
+        dataValue is double ||
+        dataValue is bool;
     return BaseResponse<T?>(
       data: json?.containsKey("data") == true
           ? isPrimitive
-              ? json!["data"]
+              ? dataValue
               : decodeAble?.fromJson(json?["data"] ?? {})
           : null,
       message: json?["message"],

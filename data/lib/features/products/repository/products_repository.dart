@@ -16,7 +16,7 @@ class ProductsRepository implements IProductsRepository {
   final IAPIService _iApiService;
 
   const ProductsRepository(this._iApiService);
-
+  
   @override
   Future<Result<List<ProductEntity>, NetworkException>> fetchProducts() async {
     var result = await _iApiService
@@ -33,7 +33,8 @@ class ProductsRepository implements IProductsRepository {
 
   @override
   Future<Result<Response<bool>?, NetworkException>> deleteProduct(
-      int productId) async {
+    int productId,
+  ) async {
     var result = await _iApiService.fetchData<BaseResponse<bool>>(
         DeleteProductRequest(
           productId: productId,

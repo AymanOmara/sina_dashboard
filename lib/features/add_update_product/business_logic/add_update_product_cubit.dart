@@ -54,4 +54,9 @@ class AddUpdateProductCubit extends Cubit<AddUpdateProductState> {
       });
     });
   }
+
+  void updateSelectedCategory(String? txt) {
+    product.type = txt ?? "";
+    emit(AddUpdateProductInitial());
+  }
 }
