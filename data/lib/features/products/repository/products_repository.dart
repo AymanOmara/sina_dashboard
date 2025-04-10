@@ -15,16 +15,22 @@ import 'package:domain/features/products/repository/i_products_repository.dart';
 class ProductsRepository implements IProductsRepository {
   final IAPIService _iApiService;
 
-  const ProductsRepository(this._iApiService);
-  
+  ProductsRepository(this._iApiService);
+
+  List<ProductEntity> products = [];
+
   @override
   Future<Result<List<ProductEntity>, NetworkException>> fetchProducts() async {
+    if (products.isNotEmpty) {
+      return Success(products);
+    }
     var result = await _iApiService
         .fetchData<List<ProductModel?>>(GetProductsRequest(), data: Products());
     return result.fold(onSuccess: (data) {
       var list =
           data?.map((e) => e?.toEntity()).whereType<ProductEntity>().toList() ??
               [];
+      products = list;
       return Success(list);
     }, onFailure: (e) {
       return Failure(e);

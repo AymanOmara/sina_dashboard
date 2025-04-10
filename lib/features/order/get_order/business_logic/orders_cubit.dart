@@ -4,31 +4,30 @@ import 'package:domain/features/order/use_case/fetch_orders_use_case.dart';
 import 'package:ibn_sina_flutter/core/display/loading_state.dart';
 import 'package:meta/meta.dart';
 
-part 'orders_history_state.dart';
+part 'orders_state.dart';
 
-class OrdersHistoryCubit extends Cubit<OrdersHistoryState> {
-  OrdersHistoryCubit(
-    this._fetchOrdersUseCase,
-  ) : super(OrdersHistoryInitial()) {
+class OrdersCubit extends Cubit<OrdersState> {
+  OrdersCubit(this._fetchOrdersUseCase) : super(OrdersInitial()) {
     fetchOrders();
   }
-  List<OrderEntity> orders  = [];
+
   LoadingState loading = Loading();
   final FetchOrdersUseCase _fetchOrdersUseCase;
+  List<OrderEntity> orders = [];
 
   void fetchOrders() {
     loading = Loading();
-    emit(OrdersHistoryInitial());
-    _fetchOrdersUseCase().then((value) {
-      value.fold(
+    emit(OrdersInitial());
+    _fetchOrdersUseCase().then((result) {
+      result.fold(
         onSuccess: (data) {
           orders = data;
           loading = LoadingSuccess(data: data);
-          emit(OrdersHistoryInitial());
+          emit(OrdersInitial());
         },
         onFailure: (exception) {
           loading = LoadingException(exception);
-          emit(OrdersHistoryInitial());
+          emit(OrdersInitial());
         },
       );
     });

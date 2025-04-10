@@ -41,6 +41,7 @@ class OrderProductEntity {
   final int productId;
   final int amount;
   final double price;
+  String productName = "";
 
   OrderProductEntity({
     required this.orderId,

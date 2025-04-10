@@ -94,10 +94,11 @@ class AddUpdateProductScreen extends StatelessWidget {
                               cubit.updateSelectedCategory(txt);
                             }),
                         _buildTextField(
-                            cubit.product.discount.toString(),
-                            "discount",
-                            (txt) => cubit.product.discount =
-                                double.tryParse(txt) ?? 0),
+                          cubit.product.discount.toString(),
+                          "discount",
+                          (txt) => cubit.product.discount =
+                              double.tryParse(txt) ?? 0,
+                        ),
                         ImagePickerComponent(
                           imageTitle: "first_photo",
                           oldImageUrl: cubit.product.firstPhoto,

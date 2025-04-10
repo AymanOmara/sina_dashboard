@@ -18,8 +18,6 @@ import 'package:ibn_sina_flutter/features/home/presentation/widgets/student_equi
 import 'package:ibn_sina_flutter/features/home/presentation/widgets/student_equipments/student_equipments_widget.dart';
 import 'package:ibn_sina_flutter/features/notifications/business_logic/notification_cubit.dart';
 import 'package:ibn_sina_flutter/features/notifications/presentation/page/notifications_screen.dart';
-import 'package:ibn_sina_flutter/features/orders_history/business_logic/orders_history_cubit.dart';
-import 'package:ibn_sina_flutter/features/orders_history/presentation/page/order_history_screen.dart';
 import 'package:ibn_sina_flutter/features/products/business_logic/products_cubit.dart';
 import 'package:ibn_sina_flutter/features/products/presentation/page/products_screen.dart';
 
@@ -84,13 +82,6 @@ class AppRouter {
       //       child: SubmitOrderScreen(),
       //     ),
       //   );
-      case AppRoutes.orderHistory:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (_) => getIt<OrdersHistoryCubit>(),
-            child: OrderHistoryScreen(),
-          ),
-        );
       case AppRoutes.studentEquipments:
         return DialogRoute(
           context: Get.context!,
