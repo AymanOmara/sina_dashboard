@@ -3,7 +3,7 @@ class Urls {
 
   static const baseUrl = "http://ibnsinadental-001-site1.ftempurl.com/api/";
   // static const baseUrl = "http://localhost:5029/api/";
-  static const baseProductImage = "http://ibnsinadental-001-site1.ftempurl.com/";
+  static const baseProductImage = "http://ibnsinadental-001-site1.ftempurl.com";
   static const banner = "Panner/GetPanner";
 
   static const products = "/Product";
