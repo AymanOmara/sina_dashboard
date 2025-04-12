@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:ibn_sina_flutter/core/ui/pdf_generator.dart';
 import 'package:ibn_sina_flutter/core/ui/sina_top_navigation_bar.dart';
 import 'package:ibn_sina_flutter/features/order/order_details/business_logic/order_details_cubit.dart';
 
@@ -55,8 +56,10 @@ class OrderDetailsScreen extends StatelessWidget {
                           child: Text("update_order_status".tr),
                         ),
                         ElevatedButton(
-                          onPressed: () {
-
+                          onPressed: ()async {
+                            var pdf =  PDFGenerator();
+                            await pdf.generateOrderDetailsPDF(cubit.order);
+                            await pdf.printOrderDetailsPDF(cubit.order);
                           },
                           child: Text(
                             "print_order".tr,

@@ -18,13 +18,13 @@ class OrderDataGridSource extends DataGridSource {
   }
 
   void _buildDataGridRows() {
-    _dataGridRows = orders.map<DataGridRow>((product) {
+    _dataGridRows = orders.map<DataGridRow>((order) {
       return DataGridRow(cells: [
-        DataGridCell<int>(columnName: 'id', value: product.orderId),
-        DataGridCell<double>(columnName: 'price', value: product.orderPrice),
+        DataGridCell<int>(columnName: 'id', value: order.orderId),
+        DataGridCell<double>(columnName: 'price', value: order.orderPrice+70),
         DataGridCell<Widget>(
           columnName: 'actions',
-          value: _actionButtons(product),
+          value: _actionButtons(order),
         ),
       ]);
     }).toList();

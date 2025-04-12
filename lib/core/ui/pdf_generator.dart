@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:domain/features/order/entity/order_entity.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:flutter/material.dart';
 
 class PDFGenerator {
   Future<void> generateOrderDetailsPDF(OrderEntity order) async {
@@ -149,7 +152,7 @@ class PDFGenerator {
         final pdf = pw.Document();
 
         // Add the same content to the PDF as in generateOrderDetailsPDF
-        final arabicFont = await PdfGoogleFonts.cairoRegular();
+        final arabicFont = pw.Font.ttf(await rootBundle.load('assets/fonts/HacenTunisia.ttf'));
         String currentDateTime =
             DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
 
@@ -159,6 +162,7 @@ class PDFGenerator {
             build: (pw.Context context) {
               return pw.Center(
                 child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [
                     pw.Text(
                       'Order Details',
@@ -198,7 +202,7 @@ class PDFGenerator {
                     pw.Row(
                       children: [
                         pw.Text(
-                          'Client Name: ',
+                          'client_code'.tr,
                           style: pw.TextStyle(
                             font: arabicFont,
                             fontSize: 12,
@@ -217,14 +221,14 @@ class PDFGenerator {
                     pw.Row(
                       children: [
                         pw.Text(
-                          'Governorate: ${order.orderGovernorate}',
+                          'Client Name',
                           style: pw.TextStyle(
                             font: arabicFont,
                             fontSize: 12,
                           ),
                         ),
                         pw.Text(
-                          order.orderGovernorate,
+                          order.useName.toString(),
                           style: pw.TextStyle(
                             font: arabicFont,
                             fontSize: 12,
@@ -233,10 +237,32 @@ class PDFGenerator {
                       ],
                     ),
                     pw.SizedBox(height: 10),
+                    pw.Directionality(
+                      textDirection: pw.TextDirection.rtl,
+                      child: pw.Text(
+                        order.orderGovernorate,
+                        style: pw.TextStyle(
+                          font: arabicFont,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+
+                    pw.Directionality(
+                      textDirection: pw.TextDirection.rtl,
+                      child: pw.Text(
+                        order.orderLocation,
+                        style: pw.TextStyle(
+                          font: arabicFont,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    pw.SizedBox(height: 10),
                     pw.Row(
                       children: [
                         pw.Text(
-                          'Client Phone Number: ',
+                          'Client Number',
                           style: pw.TextStyle(
                             font: arabicFont,
                             fontSize: 12,
@@ -250,6 +276,13 @@ class PDFGenerator {
                           ),
                         ),
                       ],
+                    ),
+                    pw.Text(
+                      "${order.orderPrice+70}",
+                      style: pw.TextStyle(
+                        font: arabicFont,
+                        fontSize: 12,
+                      ),
                     ),
                   ],
                 ),
