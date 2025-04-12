@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:common/Urls.dart';
 import 'package:data/network/remote_target.dart';
 import 'package:domain/features/order/entity/create_order_entity.dart';
@@ -15,11 +13,11 @@ class CreateOrderRequest extends IRemoteTarget {
     body = {
       "orderId": 0,
       "userId": userId,
-      "orderStatus": "string",
+      "orderStatus": "Accepted",
       "orderAcceptTime": "2025-03-16T21:32:51.715Z",
-      "orderPrice":  entity.totalPrice,
+      "orderPrice": entity.totalPrice,
       "orderLocation": entity.address,
-      "orderPhone":entity.phoneNumber,
+      "orderPhone": entity.phoneNumber,
       "paymentMethod": "string",
       "deliveryFees": 0,
       "orderExcuteTime": "2025-03-16T21:32:51.715Z",

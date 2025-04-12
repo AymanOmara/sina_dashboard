@@ -2,7 +2,7 @@ class OrderEntity {
   final int orderId;
   final int userId;
   final String orderTime;
-  final String orderStatus;
+  String orderStatus;
   final String orderAcceptTime;
   final double orderPrice;
   final String orderLocation;
@@ -14,7 +14,8 @@ class OrderEntity {
   final String userAvailableTime;
   final int orderAmount;
   final String orderGovernorate;
-  final List<OrderProductEntity> orderProductList;
+  final String useName;
+  List<OrderProductEntity> orderProductList;
 
   OrderEntity({
     required this.orderId,
@@ -33,6 +34,7 @@ class OrderEntity {
     required this.orderAmount,
     required this.orderGovernorate,
     required this.orderProductList,
+    required this.useName,
   });
 }
 

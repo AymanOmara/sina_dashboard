@@ -10,11 +10,26 @@ class OrderDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<OrderDetailsCubit, OrderDetailsState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is OrderDetailsUpdateResult) {
+          if (state.success) {
+            Get.snackbar(
+              "success".tr,
+              state.message,
+              backgroundColor: Colors.green,
+            );
+          } else {
+            Get.snackbar(
+              "error".tr,
+              state.message,
+              backgroundColor: Colors.red,
+            );
+          }
+        }
+      },
       builder: (context, state) {
         final cubit = BlocProvider.of<OrderDetailsCubit>(context);
         final order = cubit.order;
-
         return Scaffold(
           body: Column(
             children: [
@@ -30,6 +45,25 @@ class OrderDetailsScreen extends StatelessWidget {
                     _buildInfoRow("governorate".tr, order.orderGovernorate),
                     _buildInfoRow("user_phone".tr, order.orderPhone),
                     _buildInfoRow("order_price".tr, order.orderPrice),
+                    _buildInfoRow("client_name".tr, order.useName),
+                    Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            cubit.updateOrder();
+                          },
+                          child: Text("update_order_status".tr),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+
+                          },
+                          child: Text(
+                            "print_order".tr,
+                          ),
+                        )
+                      ],
+                    ),
                     _buildOrderItems(cubit),
                   ],
                 ),
@@ -67,10 +101,10 @@ class OrderDetailsScreen extends StatelessWidget {
 
   Widget _buildOrderItems(OrderDetailsCubit cubit) {
     for (var item in cubit.order.orderProductList) {
-      final product = cubit.products.firstWhere(
+      final product = cubit.products.firstWhereOrNull(
         (element) => element.productId == item.productId,
       );
-      item.productName = product.productName;
+      item.productName = product?.productName ?? "";
     }
 
     return ListView.separated(
@@ -84,16 +118,19 @@ class OrderDetailsScreen extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              item.productName,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 4),
             Row(
               children: [
-                Text("💲 ${"price".tr}: ${item.price}"),
                 const SizedBox(width: 16),
-                Text("🔢 ${"amount".tr}: ${item.amount}"),
+                Text(
+                  "${"product_name".tr} ${item.productName}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text("${"price".tr}: ${item.price}"),
+                const SizedBox(width: 16),
+                Text("${"quantity".tr}: ${item.amount}"),
               ],
             ),
           ],

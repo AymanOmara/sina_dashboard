@@ -1,5 +1,6 @@
 import 'package:data/features/authentication/repositories/auth_repository.dart';
 import 'package:data/features/cart/repository/cart_repository.dart';
+import 'package:data/features/delivery_fees/repository/delivery_fees_repository.dart';
 import 'package:data/features/favorites/repository/favorites_repository.dart';
 import 'package:data/features/home/repository/home_repository.dart';
 import 'package:data/features/notification/repository/notifications_repository.dart';
@@ -7,6 +8,7 @@ import 'package:data/features/order/repository/order_repository.dart';
 import 'package:data/features/products/repository/products_repository.dart';
 import 'package:domain/features/authentication/repositories/i_auth_repository.dart';
 import 'package:domain/features/cart/repository/i_cart_repository.dart';
+import 'package:domain/features/delivery_fees/repository/i_delivey_fees_repository.dart';
 import 'package:domain/features/favorites/repository/i_favorites_repository.dart';
 import 'package:domain/features/home/repository/i_home_repository.dart';
 import 'package:domain/features/notifications/repository/i_notifications_repository.dart';
@@ -17,7 +19,7 @@ import 'package:get_it/get_it.dart';
 Future<void> setupRepositoryInjector(GetIt diInjector) async {
   /// ********* Auth **********
   diInjector.registerSingleton<IAuthRepository>(AuthRepository(diInjector(),diInjector()));
-  
+
   /// ********* Home **********
    diInjector.registerSingleton<IHomeRepository>(HomeRepository(diInjector()));
 
@@ -34,4 +36,6 @@ Future<void> setupRepositoryInjector(GetIt diInjector) async {
    /// ********* Favorites **********
    diInjector.registerSingleton<IFavoritesRepository>(FavoritesRepository(diInjector(),diInjector()));
 
+   /// ********* Delivery Fees **********
+   diInjector.registerSingleton<IDeliveryFeesRepository>(DeliveryFeesRepository());
 }

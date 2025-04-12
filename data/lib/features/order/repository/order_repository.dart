@@ -1,6 +1,8 @@
 import 'package:data/features/order/model/order_history_model.dart';
 import 'package:data/features/order/model/order_model.dart';
 import 'package:data/features/order/request/create_order_request.dart';
+import 'package:data/features/order/request/get_order_products_request.dart';
+import 'package:data/features/order/request/update_order_request.dart';
 import 'package:data/network/i_base_api.dart';
 import 'package:domain/common/exceptions/network_exception.dart';
 import 'package:domain/common/result.dart';
@@ -48,6 +50,42 @@ class OrderRepository implements IOrderRepository {
       return Success((data?.orders ?? []).map((e) => e.toEntity()).toList());
     }, onFailure: (exception) {
       return Failure(exception);
+    });
+  }
+
+  @override
+  Future<Result<List<OrderProductEntity>, NetworkException>> fetchOrderProducts(
+    int orderId,
+  ) async {
+    var result = await _service.fetchData<OrderProductsModel>(
+      GetOrderProductRequest(
+        orderId: orderId,
+      ),
+      data: OrderProductsModel(),
+    );
+    return result.fold(
+      onSuccess: (data) {
+        return Success(
+            data?.products?.map((pr) => pr.toEntity()).toList() ?? []);
+      },
+      onFailure: (exception) {
+        return Failure(exception);
+      },
+    );
+  }
+
+  @override
+  Future<Result<OrderEntity?, NetworkException>> updateOrder(
+    OrderEntity order,
+  ) async {
+    var result = await _service.fetchData<OrderModel>(
+      UpdateOrderRequest(order: order),
+      data: OrderModel(),
+    );
+    return result.fold(onSuccess: (data) {
+      return Success(data?.toEntity());
+    }, onFailure: (e) {
+      return Failure(e);
     });
   }
 }

@@ -5,5 +5,7 @@ import 'package:domain/features/order/entity/order_entity.dart';
 
 abstract interface class IOrderRepository {
   Future<Result<OrderEntity?, NetworkException>> createOrder(CreateOrderEntity order);
+  Future<Result<OrderEntity?, NetworkException>> updateOrder(OrderEntity order);
   Future<Result<List<OrderEntity>, NetworkException>> fetchOrders();
+  Future<Result<List<OrderProductEntity>, NetworkException>> fetchOrderProducts(int productId);
 }

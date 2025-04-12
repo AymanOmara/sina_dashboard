@@ -19,36 +19,12 @@ class HomeCubit extends Cubit<HomeState> {
       route: AppRoutes.products,
     ),
     HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
+      title: 'الطلبات'.tr,
+      route: AppRoutes.order,
     ),
     HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
-    ),
-    HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
-    ),
-    HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
-    ),
-    HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
-    ),
-    HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
-    ),
-    HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
-    ),
-    HomeServiceDisplay(
-      title: 'home_service_title_1'.tr,
-      route: 'home_service_image_1',
+      title: 'رسوم الشحن'.tr,
+      route: AppRoutes.deliveryFees,
     ),
   ];
 }

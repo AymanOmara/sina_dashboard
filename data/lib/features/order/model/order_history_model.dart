@@ -57,6 +57,7 @@ class OrderHistoryModel
     this.orderGovernorate,
     this.orderProductList,
   });
+
   factory OrderHistoryModel.fromJson(Map<String, dynamic> json) {
     return OrderHistoryModel(
       orderId: json["orderid"],
@@ -125,7 +126,22 @@ class OrderHistoryModel
       orderGovernorate: orderGovernorate ?? "",
       orderProductList:
           orderProductList?.map((e) => e.toEntity()).toList() ?? [],
+      useName: "",
     );
+  }
+}
+
+class OrderProductsModel implements DecodeAble<OrderProductsModel, List> {
+  List<OrderProductModel>? products = [];
+
+  OrderProductsModel({
+    this.products,
+  });
+
+  @override
+  OrderProductsModel fromJson(List json) {
+    products = json.map((e) => OrderProductModel.fromJson(e)).toList();
+    return OrderProductsModel(products: products);
   }
 }
 
@@ -139,10 +155,10 @@ class OrderProductModel {
 
   factory OrderProductModel.fromJson(Map<String, dynamic> json) {
     return OrderProductModel(
-      orderId: json["OrderId"],
-      productId: json["ProuductId"],
-      amount: json["Amount"],
-      price: (json["Price"] as num?)?.toDouble(),
+      orderId: json["orderid"],
+      productId: json["prouductid"],
+      amount: json["amount"],
+      price: (json["price"] as num?)?.toDouble(),
     );
   }
 

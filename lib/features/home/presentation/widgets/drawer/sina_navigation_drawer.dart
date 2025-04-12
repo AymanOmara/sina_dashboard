@@ -88,7 +88,7 @@ class SinaNavigationDrawer extends StatelessWidget {
         SinaDrawerButton(
             title: "my_orders".tr,
             onTap: () {
-              Get.toNamed(AppRoutes.orderHistory);
+
             }),
         SinaDrawerButton(
             title: "contact_us".tr,

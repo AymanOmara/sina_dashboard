@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:data/network/decode_able.dart';
 import 'package:domain/features/order/entity/order_entity.dart';
-import 'package:xml/xml.dart';
 
 class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
   final int? orderId;
@@ -20,26 +17,27 @@ class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
   final String? userAvailableTime;
   final int? orderAmount;
   final String? orderGovernorate;
+  final String? useName;
   final List<OrderProductModel>? orderProductList;
 
-  OrderModel({
-    this.orderId,
-    this.userId,
-    this.orderTime,
-    this.orderStatus,
-    this.orderAcceptTime,
-    this.orderPrice,
-    this.orderLocation,
-    this.orderPhone,
-    this.paymentMethod,
-    this.deliveryFees,
-    this.orderExecuteTime,
-    this.orderCompleteTime,
-    this.userAvailableTime,
-    this.orderAmount,
-    this.orderGovernorate,
-    this.orderProductList,
-  });
+  OrderModel(
+      {this.orderId,
+      this.userId,
+      this.orderTime,
+      this.orderStatus,
+      this.orderAcceptTime,
+      this.orderPrice,
+      this.orderLocation,
+      this.orderPhone,
+      this.paymentMethod,
+      this.deliveryFees,
+      this.orderExecuteTime,
+      this.orderCompleteTime,
+      this.userAvailableTime,
+      this.orderAmount,
+      this.orderGovernorate,
+      this.orderProductList,
+      this.useName});
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
@@ -61,6 +59,7 @@ class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
       orderProductList: (json["orderProductList"] as List?)
           ?.map((e) => OrderProductModel.fromJson(e))
           .toList(),
+      useName: json["userName"],
     );
   }
 
@@ -83,6 +82,30 @@ class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
       "ordergovernorate": orderGovernorate,
       "orderProductList": orderProductList?.map((e) => e.toJson()).toList(),
     };
+  }
+
+  factory OrderModel.fromOrderEntity(OrderEntity entity) {
+    return OrderModel(
+      orderId: entity.orderId,
+      userId: entity.userId,
+      orderTime: entity.orderTime,
+      orderStatus: entity.orderStatus,
+      orderAcceptTime: entity.orderAcceptTime,
+      orderPrice: entity.orderPrice.toString(),
+      orderLocation: entity.orderLocation,
+      orderPhone: entity.orderPhone,
+      paymentMethod: entity.paymentMethod,
+      deliveryFees: entity.deliveryFees.toString(),
+      orderExecuteTime: entity.orderExecuteTime,
+      orderCompleteTime: entity.orderCompleteTime,
+      userAvailableTime: entity.userAvailableTime,
+      orderAmount: entity.orderAmount,
+      orderGovernorate: entity.orderGovernorate,
+      orderProductList: entity.orderProductList
+          .map((e) => OrderProductModel.fromEntity(e))
+          .toList(),
+      useName: entity.useName,
+    );
   }
 
   @override
@@ -108,11 +131,11 @@ class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
       orderAmount: orderAmount ?? 0,
       orderGovernorate: orderGovernorate ?? "",
       orderProductList:
-      orderProductList?.map((e) => e.toEntity()).toList() ?? [],
+          orderProductList?.map((e) => e.toEntity()).toList() ?? [],
+      useName: useName ?? "",
     );
   }
 }
-
 
 class OrderProductModel {
   final int? orderId;
@@ -139,12 +162,22 @@ class OrderProductModel {
       "Price": price,
     };
   }
+
   OrderProductEntity toEntity() {
     return OrderProductEntity(
       orderId: orderId ?? 0,
       productId: productId ?? 0,
       amount: amount ?? 0,
       price: price ?? 0.0,
+    );
+  }
+
+  factory OrderProductModel.fromEntity(OrderProductEntity entity) {
+    return OrderProductModel(
+      orderId: entity.orderId,
+      productId: entity.productId,
+      amount: entity.amount,
+      price: entity.price,
     );
   }
 }

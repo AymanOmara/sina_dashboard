@@ -1,10 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:domain/features/cart/entity/cart_entity.dart';
 import 'package:domain/features/order/entity/create_order_entity.dart';
+import 'package:domain/features/order/entity/order_entity.dart';
+import 'package:domain/features/order/use_case/create_order_use_case.dart';
 import 'package:domain/features/products/entity/product_entity.dart';
 import 'package:domain/features/products/use_case/fetch_products_use_case.dart';
 import 'package:get/get.dart';
 import 'package:ibn_sina_flutter/core/helper/utils.dart';
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 part 'create_order_state.dart';
@@ -12,12 +15,15 @@ part 'create_order_state.dart';
 class CreateOrderCubit extends Cubit<CreateOrderState> {
   CreateOrderCubit(
     this._productsUseCase,
+    this._createOrderUseCase,
   ) : super(CreateOrderInitial()) {
     fetchProducts();
   }
 
-  List<ProductEntity> products = [];
   final FetchProductsUseCase _productsUseCase;
+  final CreateOrderUseCase _createOrderUseCase;
+  List<ProductEntity> products = [];
+  OrderEntity? submittedOrder;
   CreateOrderEntity order = CreateOrderEntity();
 
   void fetchProducts() {
@@ -65,5 +71,29 @@ class CreateOrderCubit extends Cubit<CreateOrderState> {
   void changeGovernorate(String value) {
     order.governorate = value;
     emit(CreateOrderInitial());
+  }
+
+  void submitOrder() {
+    order.startTime =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateTime.now());
+    order.endTime =
+        DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(DateTime.now());
+    _createOrderUseCase(order).then((value) {
+      value.fold(
+        onSuccess: (data) {
+          submittedOrder = data;
+          emit(CreateOrderResult(
+            success: data != null,
+            message: data != null ? "نجح الطلب" : "حدث خطا",
+          ));
+        },
+        onFailure: (exception) {
+          emit(CreateOrderResult(
+            success: false,
+            message: exception.message.tr,
+          ));
+        },
+      );
+    });
   }
 }

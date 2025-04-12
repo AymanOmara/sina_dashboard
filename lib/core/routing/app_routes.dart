@@ -22,8 +22,11 @@ class AppRoutes {
   /// ********* favorites **********
   static const favorites = "favorites";
 
+  /// ********* Delivery Fees **********
+  static const deliveryFees = "deliveryFees";
+
   /// ********* order **********
-  static const cart = "cart";
   static const order = "order";
-  static const orderHistory = "orderHistory";
+  static const createOrder = "createOrder";
+  static const orderDetails = "orderDetails";
 }

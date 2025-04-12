@@ -7,6 +7,6 @@ class OrdersHistoryRequest extends IRemoteTarget {
   OrdersHistoryRequest({
     required this.userID,
   }) {
-    path = Urls.myOrders + userID.toString();
+    path = Urls.getAllOrders;
   }
 }

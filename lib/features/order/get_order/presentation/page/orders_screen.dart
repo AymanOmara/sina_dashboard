@@ -46,7 +46,7 @@ class OrdersScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
-                    AppRoutes.addUpdateProduct,
+                    AppRoutes.createOrder,
                     // arguments: UpdateProductParams(
                     //   updateAble: cubit,
                     // ),
@@ -61,6 +61,14 @@ class OrdersScreen extends StatelessWidget {
                   loadingState: cubit.loading,
                   successWidget: Expanded(
                     child: SfDataGrid(
+                      onCellTap: (cell) {
+                        var index = cell.rowColumnIndex.rowIndex;
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.orderDetails,
+                          arguments: cubit.orders[index],
+                        );
+                      },
                       columnWidthMode: ColumnWidthMode.fill,
                       shrinkWrapRows: true,
                       onQueryRowHeight: (raw) {

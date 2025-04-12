@@ -21,4 +21,12 @@ class Urls {
   static String addToFavorites = "Product/AddFavorite";
   static String removeFromFavorites = "Product/DeleteFavorite";
   static String registerFcmToken = "Notifications/RegisterFCMToken";
+
+  static String getAllOrders = "Order/GetAllOrders";
+
+  static String fetchDeliveryFees = "Delivery/GetDeliveryFees";
+
+  static String updateDeliveryFees = "Delivery/UpdateDeliveryFees";
+  static String getOrderProducts = "Order/GetOrderProducts/";
+  static String updateOrder = "Order/EditOrder/";
 }

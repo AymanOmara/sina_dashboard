@@ -139,5 +139,16 @@ Map<String, String> ar = {
   "guarantee": "الضمان",
   "rate": "التقييم",
   "cancel": "إلغاء",
-  "save": "حفظ"
+  "save": "حفظ",
+  "order_details": "تفاصيل الطلب",
+  "order_date": "تاريخ الطلب",
+  "accepted_date": "تاريخ القبول",
+  "order_status": "حالة الطلب",
+  "client_id": "كود العميل",
+  "governorate": "المحافظة",
+  "user_phone": "هاتف العميل",
+  "order_price": "سعر الطلب",
+  "client_name": "اسم العميل",
+  "quantity": "الكميه",
+  "update_order_status": "تعديل حاله الطلب",
 };

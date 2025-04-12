@@ -51,7 +51,7 @@ class SinaTextField extends StatelessWidget {
           onTap: onTap,
           keyboardType: keyboardType,
           initialValue: controller == null ? initialValue : null,
-          controller: controller?..text = initialValue ?? '',
+          controller: controller,
           readOnly: readOnly,
           obscureText: obscureText,
           onChanged: onChanged,
