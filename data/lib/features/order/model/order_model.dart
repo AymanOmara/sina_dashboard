@@ -20,24 +20,25 @@ class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
   final String? useName;
   final List<OrderProductModel>? orderProductList;
 
-  OrderModel(
-      {this.orderId,
-      this.userId,
-      this.orderTime,
-      this.orderStatus,
-      this.orderAcceptTime,
-      this.orderPrice,
-      this.orderLocation,
-      this.orderPhone,
-      this.paymentMethod,
-      this.deliveryFees,
-      this.orderExecuteTime,
-      this.orderCompleteTime,
-      this.userAvailableTime,
-      this.orderAmount,
-      this.orderGovernorate,
-      this.orderProductList,
-      this.useName});
+  OrderModel({
+    this.orderId,
+    this.userId,
+    this.orderTime,
+    this.orderStatus,
+    this.orderAcceptTime,
+    this.orderPrice,
+    this.orderLocation,
+    this.orderPhone,
+    this.paymentMethod,
+    this.deliveryFees,
+    this.orderExecuteTime,
+    this.orderCompleteTime,
+    this.userAvailableTime,
+    this.orderAmount,
+    this.orderGovernorate,
+    this.orderProductList,
+    this.useName,
+  });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
@@ -46,11 +47,11 @@ class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
       orderTime: json["ordertime"],
       orderStatus: json["orderstatus"],
       orderAcceptTime: json["orderaccepttime"],
-      orderPrice: json["orderprice"],
+      orderPrice: json["orderprice"].toString(),
       orderLocation: json["orderlocation"],
       orderPhone: json["orderphone"],
       paymentMethod: json["paymentmethod"],
-      deliveryFees: json["deliveryfees"],
+      deliveryFees: json["deliveryfees"].toString(),
       orderExecuteTime: json["orderexcutetime"],
       orderCompleteTime: json["ordercompletetime"],
       userAvailableTime: json["useravilabletime"],
@@ -80,7 +81,7 @@ class OrderModel implements DecodeAble<OrderModel?, Map<String, dynamic>> {
       "useravilabletime": userAvailableTime,
       "orderamount": orderAmount,
       "ordergovernorate": orderGovernorate,
-      "orderProductList": orderProductList?.map((e) => e.toJson()).toList(),
+      "orderProducts": orderProductList?.map((e) => e.toJson()).toList(),
     };
   }
 

@@ -5,6 +5,7 @@ import 'package:data/features/products/request/delete_product_request.dart';
 import 'package:data/features/products/request/get_products_request.dart';
 import 'package:data/network/base_response.dart';
 import 'package:data/network/i_base_api.dart';
+import 'package:domain/common/exceptions/general_exception.dart';
 import 'package:domain/common/exceptions/network_exception.dart';
 import 'package:domain/common/response.dart';
 import 'package:domain/common/result.dart';
@@ -63,8 +64,14 @@ class ProductsRepository implements IProductsRepository {
       ),
       data: ProductModel(),
     );
+
     return result.fold(
-        onSuccess: (data) => Success(data?.toEntity()),
+        onSuccess: (data) {
+          if (data?.productID == 0) {
+            return Failure(GeneralException());
+          }
+          return Success(data?.toEntity());
+        },
         onFailure: (exception) => Failure(exception));
   }
 }

@@ -12,5 +12,5 @@ class UpdateDeliveryFeesRequest extends IRemoteTarget {
   String get path => Urls.updateDeliveryFees;
 
   @override
-  HttpMethod get method => HttpMethod.post;
+  HttpMethod get method => HttpMethod.put;
 }
