@@ -28,7 +28,8 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
   SinaImage? _selectedImage;
 
   Future<void> _pickImage() async {
-    final XFile? imageFile = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? imageFile =
+        await _picker.pickImage(source: ImageSource.gallery);
 
     if (imageFile != null) {
       Uint8List imageBytes = await imageFile.readAsBytes();
@@ -46,7 +47,8 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
 
         int quality = 40; // Lower quality for smaller size
 
-        img.Image resizedImage = img.copyResize(originalImage, width: targetWidth, height: targetHeight);
+        img.Image resizedImage = img.copyResize(originalImage,
+            width: targetWidth, height: targetHeight);
         Uint8List compressedBytes = Uint8List.fromList(
           img.encodeJpg(resizedImage, quality: quality),
         );
@@ -54,20 +56,15 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
         String base64String = base64Encode(compressedBytes);
 
         // Only accept if it’s under 2048 characters
-        if (base64String.length <= 2048) {
-          setState(() {
-            _selectedImage = SinaImage(base64Image: base64String);
-            widget.onImageSelected(_selectedImage!);
-          });
+        setState(() {
+          _selectedImage = SinaImage(base64Image: base64String);
+          widget.onImageSelected(_selectedImage!);
+        });
 
-          print("Base64 Length: ${base64String.length}");
-        } else {
-          Get.snackbar("Error", "Image too large. Please choose a smaller one.");
-        }
+        print("Base64 Length: ${base64String.length}");
       }
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
