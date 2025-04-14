@@ -278,7 +278,7 @@ class PDFGenerator {
                       ],
                     ),
                     pw.Text(
-                      "${order.orderPrice+70}",
+                      "${order.orderPrice}",
                       style: pw.TextStyle(
                         font: arabicFont,
                         fontSize: 12,
