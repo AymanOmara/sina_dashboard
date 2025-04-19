@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:ibn_sina_flutter/core/helper/utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:domain/features/order/entity/order_entity.dart';
 import 'package:intl/intl.dart';
@@ -152,7 +153,8 @@ class PDFGenerator {
         final pdf = pw.Document();
 
         // Add the same content to the PDF as in generateOrderDetailsPDF
-        final arabicFont = pw.Font.ttf(await rootBundle.load('assets/fonts/HacenTunisia.ttf'));
+        final arabicFont =
+            pw.Font.ttf(await rootBundle.load('assets/fonts/HacenTunisia.ttf'));
         String currentDateTime =
             DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
 
@@ -227,12 +229,9 @@ class PDFGenerator {
                             fontSize: 12,
                           ),
                         ),
-                        pw.Text(
+                        buildText(
                           order.useName.toString(),
-                          style: pw.TextStyle(
-                            font: arabicFont,
-                            fontSize: 12,
-                          ),
+                          arabicFont,
                         ),
                       ],
                     ),
@@ -247,7 +246,6 @@ class PDFGenerator {
                         ),
                       ),
                     ),
-
                     pw.Directionality(
                       textDirection: pw.TextDirection.rtl,
                       child: pw.Text(
@@ -294,5 +292,22 @@ class PDFGenerator {
         return await pdf.save();
       },
     );
+  }
+
+  pw.Widget buildText(String text, pw.Font arabicFont) {
+    final textWidget = pw.Text(
+      text,
+      style: pw.TextStyle(
+        font: arabicFont,
+        fontSize: 12,
+      ),
+    );
+
+    return text.isArabic()
+        ? pw.Directionality(
+            textDirection: pw.TextDirection.rtl,
+            child: textWidget,
+          )
+        : textWidget;
   }
 }

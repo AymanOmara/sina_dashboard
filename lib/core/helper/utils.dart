@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:ibn_sina_flutter/core/helper/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,6 +24,12 @@ extension StringValidation on String? {
     } else {
       return "";
     }
+  }
+
+  bool isArabic() {
+    return RegExp(r'[\u0600-\u06FF]').hasMatch(
+      this ?? "",
+    );
   }
 }
 
@@ -109,6 +114,7 @@ Future<void> makePhoneCall(String phoneNumber) async {
     throw 'Could not launch $url';
   }
 }
+
 Future<void> openWhatsApp(String phoneNumber) async {
   final Uri url = Uri.parse("https://wa.me/$phoneNumber");
 
@@ -118,6 +124,7 @@ Future<void> openWhatsApp(String phoneNumber) async {
     throw 'Could not launch $url';
   }
 }
+
 Future<void> openUrl(String path) async {
   final Uri url = Uri.parse(path);
 
