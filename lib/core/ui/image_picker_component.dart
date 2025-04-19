@@ -77,7 +77,7 @@ class _ImagePickerComponentState extends State<ImagePickerComponent> {
           child: const Text("Pick Image"),
         ),
         const SizedBox(height: 10),
-        widget.oldImageUrl.isNotEmpty && widget.oldImageUrl.isURL && _selectedImage == null
+        widget.oldImageUrl.isNotEmpty && _selectedImage == null
             ? Image.network(
                 Urls.baseProductImage + widget.oldImageUrl,
                 width: 150,
