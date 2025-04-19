@@ -38,6 +38,7 @@ class OrderHistoryModel
   final int? orderAmount;
   final String? orderGovernorate;
   final List<OrderProductModel>? orderProductList;
+  final String? userName;
 
   OrderHistoryModel({
     this.orderId,
@@ -56,6 +57,7 @@ class OrderHistoryModel
     this.orderAmount,
     this.orderGovernorate,
     this.orderProductList,
+    this.userName,
   });
 
   factory OrderHistoryModel.fromJson(Map<String, dynamic> json) {
@@ -78,6 +80,7 @@ class OrderHistoryModel
       orderProductList: (json["OrderProuductList"] as List?)
           ?.map((e) => OrderProductModel.fromJson(e))
           .toList(),
+      userName: json["userName"],
     );
   }
 
@@ -126,7 +129,7 @@ class OrderHistoryModel
       orderGovernorate: orderGovernorate ?? "",
       orderProductList:
           orderProductList?.map((e) => e.toEntity()).toList() ?? [],
-      useName: "",
+      useName: userName ?? "",
     );
   }
 }

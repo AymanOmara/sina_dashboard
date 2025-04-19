@@ -26,7 +26,9 @@ class CreateProductRequest {
   int rate = 0;
   String clothes = "F";
   String teeth = "T";
+
   CreateProductRequest();
+
   CreateProductRequest.secondary(
     this.productName,
     this.productDescription,
@@ -47,9 +49,18 @@ class CreateProductRequest {
     this.size,
     this.guarantee,
     this.rate,
+    this.firstPhoto,
+    this.secondPhoto,
+    this.thirdPhoto,
+    this.fourthPhoto,
+    this.fifthPhoto,
+    this.sixthPhoto,
   );
 
   factory CreateProductRequest.fromProductEntity(ProductEntity product) {
+    List<String> safeImages = List.generate(6, (index) {
+      return index < product.images.length ? product.images[index] : "";
+    });
     return CreateProductRequest.secondary(
       product.productName,
       product.productDescription,
@@ -70,6 +81,12 @@ class CreateProductRequest {
       product.size,
       product.guarantee,
       product.rate,
+      safeImages[0],
+      safeImages[1],
+      safeImages[2],
+      safeImages[3],
+      safeImages[4],
+      safeImages[5],
     );
   }
 
