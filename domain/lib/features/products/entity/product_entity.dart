@@ -6,7 +6,7 @@ class ProductEntity {
   final String productDescription;
   final String madeIn;
   final double price;
-  final int amount;
+  int amount;
   final String exDate;
   final String others;
   final String firstYear;

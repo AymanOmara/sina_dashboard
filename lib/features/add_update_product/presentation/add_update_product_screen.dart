@@ -88,6 +88,12 @@ class AddUpdateProductScreen extends StatelessWidget {
                             (txt) => cubit.product.fifthYear = txt),
                         _buildTextField(cubit.product.type, "type",
                             (txt) => cubit.product.type = txt),
+                        _buildTextField(
+                          cubit.product.amount.toString(),
+                          "amount",
+                          (txt) =>
+                              cubit.product.amount = int.tryParse(txt) ?? 0,
+                        ),
                         CategoryDropDown(
                             value: cubit.product.type,
                             onChange: (txt) {

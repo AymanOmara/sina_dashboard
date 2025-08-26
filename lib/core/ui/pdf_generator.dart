@@ -223,7 +223,7 @@ class PDFGenerator {
                     pw.Row(
                       children: [
                         pw.Text(
-                          'Client Name',
+                          'Client Name ',
                           style: pw.TextStyle(
                             font: arabicFont,
                             fontSize: 12,
@@ -296,7 +296,7 @@ class PDFGenerator {
 
   pw.Widget buildText(String text, pw.Font arabicFont) {
     final textWidget = pw.Text(
-      text,
+      " $text ",
       style: pw.TextStyle(
         font: arabicFont,
         fontSize: 12,
